@@ -1,12 +1,30 @@
 {
-  "name": "node-red-msbot-connector",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@sn0rk/node-red-msbot-connector",
+  "version": "0.0.1",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Ivanov Aleksey",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "botbuilder": "^3.*.*",
+    "node-red-viseo-bot-manager": "~0.0",
+    "node-red-viseo-helper": "~0.1"
+  },
+  "node-red": {
+    "nodes": {
+      "MSBot": "nodes/msbot-connector.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0875695/node-red-msbot-connector.git"
+  },
+  "bugs": {
+    "url": "https://github.com/0875695/node-red-msbot-connector/issues"
+  },
+  "homepage": "https://github.com/0875695/node-red-msbot-connector#readme",
+  "description": ""
 }
