@@ -65,6 +65,9 @@ module.exports = function (RED) {
         config.port = botConfig.port;
 
         startServer(node, config, RED);
+        this.on('close', (done) => { stopServer(node, config, done) });
+
+
     };
     RED.nodes.registerType("MSBot receiver", MSBotInNode);
 };
@@ -72,6 +75,12 @@ module.exports = function (RED) {
 // *****************************************************
 // * SERVER                                            *
 // *****************************************************
+// Stop server
+const stopServer = (node, config, done) => {
+    helper.removeListener('reply', REPLY_HANDLER[node.id])
+    server.stop();
+    done();
+}
 
 let REPLY_HANDLER = {};
 const startServer = (node, config, RED) => {
@@ -89,19 +98,24 @@ const startServer = (node, config, RED) => {
         }
         node.status({fill: "green", shape: "dot", text: "connected"});
 
-       try{
-           msBot.bindDialogs(bot, (err, data, type) => {
-               helper.emitEvent(type, node, data, config);
 
-               // Log activity
-               try { setTimeout(function() { helper.trackActivities(node)},0); }
-               catch(err) { console.log(err); }
+        msBot.bindDialogs(bot, (err, data, type) => {
+            helper.emitEvent(type, node, data, config);
 
-               if (type === "received") {
-                   return node.send(data);
-               }
-           });
-       } catch(err){}
+            // Log activity
+            try {
+                setTimeout(function () {
+                    helper.trackActivities(node)
+                }, 0);
+            } catch (err) {
+                console.log(err);
+            }
+
+            if (type === "received") {
+                return node.send(data);
+            }
+        });
+
 
         // Handle all reply
         REPLY_HANDLER[node.id] = (node, data, config) => {
