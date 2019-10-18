@@ -1,5 +1,5 @@
 {
-  "name": "@sn0rk/node-red-msbot-connector",
+  "name": "node-red-msbot-connector",
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {

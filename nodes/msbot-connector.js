@@ -81,7 +81,7 @@ const startServer = (node, config, RED) => {
 
     // **********************************
 
-    server.start((err, bot) => {
+    server.start((err, connector) => {
 
         if (err) {
             let status = "disconected (" + err.message + ")";
@@ -89,7 +89,9 @@ const startServer = (node, config, RED) => {
         }
         node.status({fill: "green", shape: "dot", text: "connected"});
 
-       try{
+        let bot = server.bindConnector(connector, config);
+
+       // try{
            msBot.bindDialogs(bot, (err, data, type) => {
                helper.emitEvent(type, node, data, config);
 
@@ -101,15 +103,15 @@ const startServer = (node, config, RED) => {
                    return node.send(data);
                }
            });
-       } catch(err){}
+       // } catch(err){}
 
         // Handle all reply
         REPLY_HANDLER[node.id] = (node, data, config) => {
-            try {
+            // try {
                 reply(bot, node, data, config)
-            } catch (ex) {
-                console.log(ex);
-            }
+            // } catch (ex) {
+            //     console.log(ex);
+            // }
         };
         helper.listenEvent('reply', REPLY_HANDLER[node.id])
 
@@ -278,6 +280,7 @@ const getMessage = (node, address, replies, isPush) => {
         }
 
         // Botbuilder Message (Cortana) should set that for prompt
+
         if (reply.prompt && msg.inputHint) {
             msg.inputHint("expectingInput");
         }
