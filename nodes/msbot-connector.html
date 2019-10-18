@@ -4,9 +4,10 @@
 <script type="text/javascript">
     RED.nodes.registerType('MS bot', {
         category: 'config',
+        icon: "microsoft.svg", align: "left",
         defaults: {
             botname: {value: "", required: false},
-            port: {value: "", required: true},
+            port: {value: "", required: true, validate:RED.validators.number()},
             appId: {value: "", required: true},
             appPass: {value: "", required: true},
             baseapiurl: {value: "", required: false},
@@ -75,6 +76,7 @@
 <script type="text/javascript">
     RED.nodes.registerType('MSBot receiver', {
         category: 'MS BOT',
+        icon: "microsoft.svg", align: "left",
         color: '#FFAAAA',
         defaults: {
             name: {value: ""},

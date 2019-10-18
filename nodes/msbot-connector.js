@@ -149,6 +149,7 @@ const reply = (bot, node, data, config) => {
 
         message.address(address);
 
+
         // Adding the metadata
         if (data.metadata) {
             message.data.value = data.metadata;
