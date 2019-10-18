@@ -5,13 +5,13 @@
     RED.nodes.registerType('MS bot', {
         category: 'config',
         defaults: {
-            botname: {value: "", required: true},
+            botname: {value: "", required: false},
             port: {value: "", required: true},
             appId: {value: "", required: true},
             appPass: {value: "", required: true},
             baseapiurl: {value: "", required: false},
-
-            verboselogging: {value: false, required: false}
+            VISEOkey: {value: "", required: true},
+            verboselogging: {value: true, required: false}
         },
         label: function () {
             return this.botname;
@@ -22,27 +22,34 @@
 <script type="text/x-red" data-template-name="MS bot">
     <div class="form-row" style="min-width: 700px">
         <div class="form-row">
-            <label for="node-config-input-botname"><i class="fab fa-windows"></i> Bot-Name</label>
+            <label for="node-config-input-botname"><i class="fa fa-windows"></i> Bot-Name</label>
             <input type="text" id="node-config-input-botname" placeholder="(Name of bot to connect to)">
         </div>
 
         <hr align="middle"/>
 
         <div class="form-row">
-            <label for="node-config-input-port"><i class="fas fa-ethernet"></i> Port</label>
+            <label for="node-config-input-port"><i class="fa fa-sitemap"></i> Port</label>
             <input type="text" id="node-config-input-port" placeholder="3978">
         </div>
         <div class="form-row">
-            <label for="node-config-input-appId"><i class="fas fa-fingerprint"></i> AppIds</label>
+            <label for="node-config-input-appId"><i class="fa fa-id-card-o"></i> AppIds</label>
             <input type="text" id="node-config-input-appId">
         </div>
         <div class="form-row">
-            <label for="node-config-input-appPass"><i class="fas fa-passport"></i> AppPass</label>
+            <label for="node-config-input-appPass"><i class="fa fa-ticket"></i> AppPass</label>
             <input type="text" id="node-config-input-appPass">
         </div>
         <div class="form-row">
             <label for="node-config-input-baseapiurl"><i class="fa fa-server"></i> Server URL</label>
             <input type="text" id="node-config-input-baseapiurl" placeholder="/api/v1/messages">
+        </div>
+
+        <hr align="middle"/>
+
+        <div class="form-row">
+            <label for="node-config-input-VISEOkey"><i class="fa fa-key"></i></i> VISEO Bot Maker key</label>
+            <input type="text" id="node-config-input-VISEOkey">
         </div>
 
         <hr align="middle"/>
@@ -68,7 +75,7 @@
 <script type="text/javascript">
     RED.nodes.registerType('MSBot receiver', {
         category: 'MS BOT',
-        color: '#31dda9',
+        color: '#FFAAAA',
         defaults: {
             name: {value: ""},
             bot: {value: "", type: "MS bot", required: true}
@@ -87,7 +94,7 @@
 
 <script type="text/x-red" data-template-name="MSBot receiver">
     <div class="form-row">
-        <label for="node-input-bot"><i class="u u1"></i> Bot</label>
+        <label for="node-input-bot"><i class="fa fa-windows"></i> Bot</label>
         <input type="text" id="node-input-bot" placeholder="Bot">
     </div>
     <div class="form-row">
