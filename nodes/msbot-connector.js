@@ -63,6 +63,7 @@ module.exports = function (RED) {
         config.appPass = botConfig.appPass;
         config.verbose = botConfig.verbose;
         config.port = botConfig.port;
+        config.baseapiurl = botConfig.baseapiurl;
 
         startServer(node, config, RED);
         this.on('close', (done) => { stopServer(node, config, done) });
